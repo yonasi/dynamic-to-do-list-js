@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /**
      * Create the addTask Function:
-     * Responsible for retrieving the input, validating it, creating the new task element,
-     * and attaching the remove functionality.
+     * Handles input retrieval, validation, task element creation, and attaching the remove logic.
      */
     function addTask() {
         // Retrieve and trim the value from the task input field.
@@ -20,51 +19,46 @@ document.addEventListener('DOMContentLoaded', function() {
             return; // Exit function if input is empty
         }
 
-        // --- Task Creation ---
+        // --- Task Creation and Removal Logic (Modified as requested) ---
 
-        // Create a new <li> element.
+        // 1. Create a new <li> element.
         const listItem = document.createElement('li');
         // Set its textContent to taskText.
         listItem.textContent = taskText;
 
-        // Create a new button element for removing the task.
+        // 2. Create a new button element for removing the task.
         const removeBtn = document.createElement('button');
         // Set its textContent to "Remove".
         removeBtn.textContent = "Remove";
         // Give it a class name of 'remove-btn'.
         removeBtn.className = 'remove-btn';
 
-        // Assign an onclick event to the remove button:
-        // When triggered, it removes the <li> element (its parent) from taskList.
+        // 3. Assign an onclick event to the remove button:
+        // When triggered, it removes the listItem element (its parent) from taskList.
         removeBtn.onclick = function() {
             taskList.removeChild(listItem);
         };
 
-        // Append the remove button to the <li> element.
+        // 4. Append the remove button to the <li> element.
         listItem.appendChild(removeBtn);
 
-        // Append the <li> to taskList.
+        // 5. Append the <li> to taskList.
         taskList.appendChild(listItem);
 
-        // Clear the task input field.
+        // 6. Clear the task input field.
         taskInput.value = "";
     }
 
-    // --- Attach Event Listeners ---
+    // --- Attach Event Listeners (Modified as requested) ---
 
-    // 1. Add event listener to addButton for click event.
+    // 1. Add an event listener to addButton that calls addTask when the button is clicked.
     addButton.addEventListener('click', addTask);
 
-    // 2. Add event listener to taskInput for 'keypress' event (allowing Enter key).
+    // 2. Add an event listener to taskInput for the 'keypress' event.
     taskInput.addEventListener('keypress', function(event) {
         // Check if event.key is equal to 'Enter' before calling addTask.
         if (event.key === 'Enter') {
             addTask();
         }
     });
-
-    // The instruction "Invoke the addTask function on DOMContentLoaded" seems redundant
-    // for an empty list initialization but will be ignored to prevent a blank task
-    // unless the intention was to add initial content, which wasn't specified.
-    // The main logic is encapsulated in the event listeners.
 });
